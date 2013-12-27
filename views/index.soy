@@ -1,7 +1,7 @@
 {namespace index}
 
 /**
- * a base template.
+ * A base template.
  */
 {template .base}
 <!DOCTYPE html>
@@ -29,6 +29,9 @@
         <p>想要到达明天，现在就要启程</p>
         <p><a href="#" class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
       </div>
+      {call .signup}
+        {param baseId: 'signup' /}
+      {/call}
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -36,4 +39,53 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
+{/template}
+
+/**
+ * A template provides input forms for sign up.
+ * @param baseId {string} the base id for the root element of sign up form.
+ */
+{template .signup}
+<form role="form" id="{$baseId}.form">
+  <div class="form-group">
+    <label for="{$baseId}.fullName.input">Full Name</label>
+    <input type="text" class="form-control" id="{$baseId}.fullName.input" placeholder="Enter full name">
+  </div>
+  <div class="form-group">
+    <label for="{$baseId}.email.input">Email address</label>
+    <input type="email" class="form-control" id="{$baseId}.email.input" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="{$baseId}.password.input">Password</label>
+    <input type="password" class="form-control" id="{$baseId}.password.input" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="{$baseId}.passwordRetype.input">Re-enter Password</label>
+    <input type="password" class="form-control" id="{$baseId}.passwordRetype.input" placeholder="Re-enter Password">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Check me out
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">启程</button>
+</form>
+{/template}
+
+/**
+ * A template provides input forms for login.
+ * @param baseId {string} the base id for the root element of login form.
+ */
+{template .login}
+<form role="form" id="{$baseId}.form">
+  <div class="form-group">
+    <label for="email.input">Email address</label>
+    <input type="email" class="form-control" id="{$baseId}.email.input" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="password.input">Password</label>
+    <input type="password" class="form-control" id="{$baseId}.password.input" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Sign ins</button>
+</form>
 {/template}
