@@ -1,3 +1,9 @@
+{namespace index}
+
+/**
+ * a base template.
+ */
+{template .base}
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +22,7 @@
     <![endif]-->
   </head>
   <body>
-    <div id="header"/>
+    {call header.navbar /}
     <div class="container theme-showcase">
       <div class="jumbotron">
         <h1>Welcome to qiCheng!</h1>
@@ -28,13 +34,6 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script>
-      $( "#header" ).load( "header.html", function( response, status, xhr ) {
-        if ( status == "error" ) {
-          var msg = "Sorry but there was an error: ";
-          console.log( msg + xhr.status + " " + xhr.statusText );
-        }
-      });
-    </script>
   </body>
 </html>
+{/template}
