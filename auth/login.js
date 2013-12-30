@@ -67,8 +67,8 @@ module.exports = function(app) {
 			} else {
 				var newUser = new QcUser({
 					weiboId: o.id,
-					email: o.emails[0].value,
-					name: o.screen_name
+					email: o.id + "@sina-weibo-qicheng.com",
+					name: o.name
 				}).save(function(err, newUser) {
 					if (err) throw err;
 					res.user = newUser;
