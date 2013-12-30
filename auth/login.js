@@ -57,7 +57,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/auth/weibo/login', function(req, res) {
-		QcUsers.findOne({
+		QcUser.findOne({
 			weiboId: req.query.weiboId
 		}, function(err, oldUser) {
 			if (err) throw err;
