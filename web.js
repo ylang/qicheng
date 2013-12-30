@@ -12,7 +12,7 @@ var WeiboStrategy = require('passport-weibo').Strategy;
 var weiboEnv = {
     appKey: process.env.WEIBO_APP_KEY,
     appSecret: process.env.WEIBO_APP_SECRET,
-    callbackURL: "http://qicheng.herokuapp.com/auth/weibo/callback"
+    callbackURL: "/auth/weibo/callback"
 }
 
 soynode.setOptions({
@@ -79,29 +79,7 @@ function configureExpress(app) {
 
 function configurePassport() {
     passport.use(QcUser.createStrategy());
-
-    passport.use(new WeiboStrategy({
-            clientID: weiboEnv.appKey,
-            clientSecret: weiboEnv.appSecret,
-            callbackURL: weiboEnv.callbackURL
-        },
-        function(accessToken, refreshToken, profile, done) {
-            QcUsers.findOne({weiboId : profile.id}, function(err, oldUser){
-                if(oldUser){
-                    done(null,oldUser);
-                }else{
-                    var newUser = new QcUsers({
-                        weiboId: profile.id,
-                        email : profile.emails[0].value,
-                        name : profile.displayName
-                    }).save(function(err,newUser){
-                        if(err) throw err;
-                        done(null, newUser);
-                    });
-                }
-            });
-        }));
-
+    
     passport.serializeUser(QcUser.serializeUser());
     passport.deserializeUser(QcUser.deserializeUser());
 }

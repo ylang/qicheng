@@ -56,13 +56,10 @@ module.exports = function(app) {
 		res.redirect('/');
 	});
 
-	app.get('/auth/weibo',
-			passport.authenticate('weibo'),
-			function(req, res) {
-			// The request will be redirected to weibo for authentication, so this
-			// function will not be called.
-			}
-	);
+	app.get('/auth/weibo', passport.authenticate('weibo'), function(req, res) {
+		// The request will be redirected to weibo for authentication, so this
+		// function will not be called.
+	});
 
 	// GET /auth/weibo/callback
 	//   Use passport.authenticate() as route middleware to authenticate the
