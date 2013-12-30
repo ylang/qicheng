@@ -9,6 +9,12 @@ var LocalStrategy = require('passport-local').Strategy;
 var QcUser = require('./model/QcUser');
 var WeiboStrategy = require('passport-weibo').Strategy;
 
+var weiboEnv = {
+    appKey: "sampleKey",
+    appSecret: "sampleSecret",
+    callbackURL: "http://127.0.0.1:8000/auth/weibo/callback"
+}
+
 soynode.setOptions({
     outputDir: os.tmpdir(),
     uniqueDir: true,
@@ -75,17 +81,17 @@ function configurePassport() {
     passport.use(QcUser.createStrategy());
 
     passport.use(new WeiboStrategy({
-            clientID: appKey,
-            clientSecret: appSecret,
-            callbackURL: "http://127.0.0.1:8000/auth/weibo/callback"
+            clientID: weiboEnv.appKey,
+            clientSecret: weiboEnv.appSecret,
+            callbackURL: weiboEnv.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
-            QcUsers.findOne({weibo.id : profile.id}, function(err, oldUser){
+            QcUsers.findOne({weiboId : profile.id}, function(err, oldUser){
                 if(oldUser){
                     done(null,oldUser);
                 }else{
                     var newUser = new QcUsers({
-                        weibo : {id: profile.id},
+                        weiboId: profile.id,
                         email : profile.emails[0].value,
                         name : profile.displayName
                     }).save(function(err,newUser){

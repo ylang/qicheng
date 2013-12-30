@@ -4,9 +4,7 @@ var Schema = mongoose.Schema;
 
 var QcUser = new Schema({
 	name: String,
-	weibo: {
-		id: String
-	}
+	weiboId: String
 });
 
 var localMongooseOptions = {
