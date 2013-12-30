@@ -56,9 +56,26 @@ module.exports = function(app) {
 		res.redirect('/');
 	});
 
-	app.get('/auth/weibo', passport.authenticate('weibo'), function(req, res) {
-		// The request will be redirected to weibo for authentication, so this
-		// function will not be called.
+	app.get('/auth/weibo/login', function(req, res) {
+		QcUsers.findOne({
+			weiboId: req.query.weiboId
+		}, function(err, oldUser) {
+			if (err) throw err;
+			if (oldUser) {
+				res.user = oldUser;
+				res.redirect('/');
+			} else {
+				var newUser = new QcUsers({
+					weiboId: o.id,
+					email: o.emails[0].value,
+					name: o.screen_name
+				}).save(function(err, newUser) {
+					if (err) throw err;
+					res.user = newUser;
+					res.redirect('/');
+				});
+			}
+		});
 	});
 
 	// GET /auth/weibo/callback
