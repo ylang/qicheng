@@ -39,7 +39,8 @@ module.exports = function(app) {
 	});
 
 	app.post('/auth/login', passport.authenticate('local'), function(req, res) {
-        res.redirect('/');
+        req.user.save();
+        return res.send('success');
     });
 
     app.get('/auth/logout', function(req, res) {

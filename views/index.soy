@@ -2,7 +2,7 @@
 
 /**
  * A base template.
- * @param userEmail {string} the email of the user logged in.
+ * @param userDisplayName {string} the email of the user logged in.
  */
 {template .base}
 <!DOCTYPE html>
@@ -14,6 +14,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- jquery -->
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/js/jquery.validate.js" type="text/javascript"></script>
+    <script src="/js/login.js" type="text/javascript"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,7 +26,7 @@
   </head>
   <body>
     {call header.navbar}
-      {param userEmail: $userEmail /}
+      {param userDisplayName: $userDisplayName /}
     {/call}
     <div class="container theme-showcase">
       <div class="jumbotron">
@@ -62,8 +64,6 @@
         </div>
       </div>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
@@ -75,22 +75,22 @@
  * @param baseId {string} the base id for the root element of sign up form.
  */
 {template .signup}
-<form role="form" id="{$baseId}.form" action="/auth/signup" method="post">
+<form role="form" id="{$baseId}-form" action="/auth/signup" method="post" name="signup">
   <div class="form-group">
-    <label for="{$baseId}.fullName.input">Full Name</label>
-    <input type="text" class="form-control" id="{$baseId}.fullName.input" name="fullName" placeholder="Enter full name">
+    <label for="{$baseId}-fullName-input">Full Name</label>
+    <input type="text" class="form-control" id="{$baseId}-fullName-input" name="name" placeholder="Enter full name">
   </div>
   <div class="form-group">
-    <label for="{$baseId}.email.input">Email address</label>
-    <input type="email" class="form-control" id="{$baseId}.email.input" name="email" placeholder="Enter email">
+    <label for="{$baseId}-email-input">Email address</label>
+    <input type="email" class="form-control" id="{$baseId}-email-input" name="email" placeholder="Enter email">
   </div>
   <div class="form-group">
-    <label for="{$baseId}.password.input">Password</label>
-    <input type="password" class="form-control" id="{$baseId}.password.input" name="password" placeholder="Password">
+    <label for="{$baseId}-password-input">Password</label>
+    <input type="password" class="form-control" id="{$baseId}-password-input" name="password" placeholder="Password">
   </div>
   <div class="form-group">
-    <label for="{$baseId}.passwordRetype.input">Re-enter Password</label>
-    <input type="password" class="form-control" id="{$baseId}.passwordRetype.input" placeholder="Re-enter Password">
+    <label for="{$baseId}-passwordRetype-input">Re-enter Password</label>
+    <input type="password" class="form-control" id="{$baseId}-passwordRetype-input" name="passwordRetype" placeholder="Re-enter Password">
   </div>
   <div class="checkbox">
     <label>
@@ -106,14 +106,14 @@
  * @param baseId {string} the base id for the root element of login form.
  */
 {template .login}
-<form role="form" id="{$baseId}.form" action="/auth/login" method="post">
+<form role="form" id="{$baseId}-form" action="/auth/login" method="post">
   <div class="form-group">
-    <label for="email.input">Email address</label>
-    <input type="email" class="form-control" id="{$baseId}.email.input" name="email" placeholder="Enter email">
+    <label for="email-input">Email address</label>
+    <input type="email" class="form-control" id="{$baseId}-email-input" name="email" placeholder="Enter email">
   </div>
   <div class="form-group">
-    <label for="password.input">Password</label>
-    <input type="password" class="form-control" id="{$baseId}.password.input" name="password"placeholder="Password">
+    <label for="password-input">Password</label>
+    <input type="password" class="form-control" id="{$baseId}-password-input" name="password"placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Sign in</button>
 </form>

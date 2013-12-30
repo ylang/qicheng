@@ -1,9 +1,9 @@
 module.exports = function(app) {
     app.get('/', function(req, res) {
-        var email = req.user? req.user.email: null;
+        var name = req.user? req.user.name: null;
         res.render('index', {
             'function': 'base',
-            'userEmail': email
+            'userDisplayName': name
         });
     });
 }
