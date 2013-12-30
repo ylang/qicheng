@@ -1,12 +1,13 @@
-var path = require('path');
 var express = require('express');
 var http = require('http');
 var mongoose = require('mongoose');
 var os = require('os');
-var soynode = require('soynode');
 var passport = require('passport');
+var path = require('path');
+var soynode = require('soynode');
 var LocalStrategy = require('passport-local').Strategy;
 var QcUser = require('./model/QcUser');
+var WeiboStrategy = require('passport-weibo').Strategy;
 
 soynode.setOptions({
     outputDir: os.tmpdir(),
@@ -72,6 +73,28 @@ function configureExpress(app) {
 
 function configurePassport() {
     passport.use(QcUser.createStrategy());
+
+    passport.use(new WeiboStrategy({
+            clientID: appKey,
+            clientSecret: appSecret,
+            callbackURL: "http://127.0.0.1:8000/auth/weibo/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            QcUsers.findOne({weibo.id : profile.id}, function(err, oldUser){
+                if(oldUser){
+                    done(null,oldUser);
+                }else{
+                    var newUser = new QcUsers({
+                        weibo : {id: profile.id},
+                        email : profile.emails[0].value,
+                        name : profile.displayName
+                    }).save(function(err,newUser){
+                        if(err) throw err;
+                        done(null, newUser);
+                    });
+                }
+            });
+        }));
 
     passport.serializeUser(QcUser.serializeUser());
     passport.deserializeUser(QcUser.deserializeUser());

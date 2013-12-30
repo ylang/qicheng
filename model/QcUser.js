@@ -3,7 +3,10 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var Schema = mongoose.Schema;
 
 var QcUser = new Schema({
-	name: String
+	name: String,
+	weibo: {
+		id: String
+	}
 });
 
 var localMongooseOptions = {
