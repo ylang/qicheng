@@ -65,7 +65,7 @@ module.exports = function(app) {
 				res.user = oldUser;
 				res.redirect('/');
 			} else {
-				var newUser = new QcUsers({
+				var newUser = new QcUser({
 					weiboId: o.id,
 					email: o.emails[0].value,
 					name: o.screen_name
