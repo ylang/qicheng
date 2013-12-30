@@ -1,5 +1,9 @@
 module.exports = function(app) {
     app.get('/', function(req, res) {
-        res.render('index', {'function': 'base'});
+        var email = req.user? req.user.email: null;
+        res.render('index', {
+            'function': 'base',
+            'userEmail': email
+        });
     });
 }

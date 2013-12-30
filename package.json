@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "3.x",
-    "mongoose": "3.8.x",
-    "soynode": "~0.3.2"
+    "mongoose": "~3.8.3",
+    "soynode": "~0.3.2",
+    "passport-weibo": "~0.1.0",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6",
+    "passport-local-mongoose": "~0.2.5"
   },
   "engines": {
     "node": "0.10.x",

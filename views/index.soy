@@ -2,6 +2,7 @@
 
 /**
  * A base template.
+ * @param userEmail {string} the email of the user logged in.
  */
 {template .base}
 <!DOCTYPE html>
@@ -22,7 +23,9 @@
     <![endif]-->
   </head>
   <body>
-    {call header.navbar /}
+    {call header.navbar}
+      {param userEmail: $userEmail /}
+    {/call}
     <div class="container theme-showcase">
       <div class="jumbotron">
         <h1>Welcome to qiCheng!</h1>
@@ -72,18 +75,18 @@
  * @param baseId {string} the base id for the root element of sign up form.
  */
 {template .signup}
-<form role="form" id="{$baseId}.form">
+<form role="form" id="{$baseId}.form" action="/auth/signup" method="post">
   <div class="form-group">
     <label for="{$baseId}.fullName.input">Full Name</label>
-    <input type="text" class="form-control" id="{$baseId}.fullName.input" placeholder="Enter full name">
+    <input type="text" class="form-control" id="{$baseId}.fullName.input" name="fullName" placeholder="Enter full name">
   </div>
   <div class="form-group">
     <label for="{$baseId}.email.input">Email address</label>
-    <input type="email" class="form-control" id="{$baseId}.email.input" placeholder="Enter email">
+    <input type="email" class="form-control" id="{$baseId}.email.input" name="email" placeholder="Enter email">
   </div>
   <div class="form-group">
     <label for="{$baseId}.password.input">Password</label>
-    <input type="password" class="form-control" id="{$baseId}.password.input" placeholder="Password">
+    <input type="password" class="form-control" id="{$baseId}.password.input" name="password" placeholder="Password">
   </div>
   <div class="form-group">
     <label for="{$baseId}.passwordRetype.input">Re-enter Password</label>
@@ -103,14 +106,14 @@
  * @param baseId {string} the base id for the root element of login form.
  */
 {template .login}
-<form role="form" id="{$baseId}.form">
+<form role="form" id="{$baseId}.form" action="/auth/login" method="post">
   <div class="form-group">
     <label for="email.input">Email address</label>
-    <input type="email" class="form-control" id="{$baseId}.email.input" placeholder="Enter email">
+    <input type="email" class="form-control" id="{$baseId}.email.input" name="email" placeholder="Enter email">
   </div>
   <div class="form-group">
     <label for="password.input">Password</label>
-    <input type="password" class="form-control" id="{$baseId}.password.input" placeholder="Password">
+    <input type="password" class="form-control" id="{$baseId}.password.input" name="password"placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Sign in</button>
 </form>
