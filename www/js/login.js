@@ -57,7 +57,11 @@ $(document).ready(function() {
 				login: function(o) { //登录后的回调函数
 					alert("login: " + o);
 					$.ajax({
-						url: '/auth/weibo/login?weiboId=' + o.id,
+						url: '/auth/weibo/login',
+						data: {
+							weiboId: o.id,
+							name: o.name
+						}
 					});
 				},
 				logout: function() { //退出后的回调函数

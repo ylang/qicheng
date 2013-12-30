@@ -66,9 +66,9 @@ module.exports = function(app) {
 				res.redirect('/');
 			} else {
 				var newUser = new QcUser({
-					weiboId: o.id,
-					email: o.id + "@sina-weibo-qicheng.com",
-					name: o.name
+					weiboId: req.query.id,
+					email: req.query.id + "@sina-weibo-qicheng.com",
+					name: req.query.name
 				}).save(function(err, newUser) {
 					if (err) throw err;
 					res.user = newUser;
