@@ -62,7 +62,7 @@ module.exports = function(app) {
 		}, function(err, oldUser) {
 			if (err) throw err;
 			if (oldUser) {
-				res.user = oldUser;
+				req.user = oldUser;
 				res.redirect('/');
 			} else {
 				var newUser = new QcUser({
@@ -71,7 +71,7 @@ module.exports = function(app) {
 					name: req.query.name
 				}).save(function(err, newUser) {
 					if (err) throw err;
-					res.user = newUser;
+					req.user = newUser;
 					res.redirect('/');
 				});
 			}
