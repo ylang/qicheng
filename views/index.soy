@@ -62,7 +62,15 @@
           </div>
         </div>
         <div class="col-md-4">
-
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Weibo</h3>
+            </div>
+            <div class="panel-body">
+              {call .weibo}
+              {/call}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -119,4 +127,11 @@
   </div>
   <button type="submit" class="btn btn-default">Sign in</button>
 </form>
+{/template}
+
+/**
+ * A template provides a link to login with Weibo.
+ */
+{template .weibo}
+<a class="btn btn-default" href="/auth/weibo">Weibo</a>
 {/template}

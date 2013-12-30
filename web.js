@@ -10,9 +10,9 @@ var QcUser = require('./model/QcUser');
 var WeiboStrategy = require('passport-weibo').Strategy;
 
 var weiboEnv = {
-    appKey: "sampleKey",
-    appSecret: "sampleSecret",
-    callbackURL: "http://127.0.0.1:8000/auth/weibo/callback"
+    appKey: process.env.WEIBO_APP_KEY,
+    appSecret: process.env.WEIBO_APP_SECRET,
+    callbackURL: "http://qicheng.herokuapp.com/auth/weibo/callback"
 }
 
 soynode.setOptions({
