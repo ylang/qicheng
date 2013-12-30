@@ -22,7 +22,7 @@ module.exports = function(app) {
 			console.log("email available");
 			var user = new QcUser({
 				email: req.body.email,
-				name: req.body.fullName
+				name: req.body.name
 			});
 			user.setPassword(req.body.password, function(err) {
 				if (err) {
@@ -66,8 +66,8 @@ module.exports = function(app) {
 				res.redirect('/');
 			} else {
 				var newUser = new QcUser({
-					weiboId: req.query.id,
-					email: req.query.id + "@sina-weibo-qicheng.com",
+					weiboId: req.query.weiboId,
+					email: req.query.weiboId + "@sina-weibo-qicheng.com",
 					name: req.query.name
 				}).save(function(err, newUser) {
 					if (err) throw err;
