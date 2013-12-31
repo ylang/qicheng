@@ -40,7 +40,10 @@ module.exports = function(app) {
 						});
 					}
 					console.log("sign up success!");
-					return res.send('success');
+					req.login(user, function(err) {
+						if (err) throw err;
+						res.redirect('/');
+					});
 				});
 			});
 		});
@@ -63,7 +66,11 @@ module.exports = function(app) {
 			if (err) throw err;
 			if (oldUser) {
 				oldUser.save();
-				res.redirect('/');
+				req.login(oldUser, function(err) {
+					if (err) throw err;
+					console.log('weibo login: old user');
+					res.redirect('/');
+				});
 			} else {
 				var newUser = new QcUser({
 					weiboId: req.query.weiboId,
@@ -71,7 +78,11 @@ module.exports = function(app) {
 					name: req.query.name
 				}).save(function(err, newUser) {
 					if (err) throw err;
-					res.redirect('/');
+					req.login(newUser, function(err) {
+						if (err) throw err;
+						console.log('weibo login: new user: ' + newUser);
+						res.redirect('/');
+					});
 				});
 			}
 		});
