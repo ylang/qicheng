@@ -1,9 +1,12 @@
 module.exports = function(app) {
     app.get('/', function(req, res) {
-        var name = req.user? req.user.name: null;
+        var isAuth = req.user? true: false;
+        var name = isAuth? req.user.name: null;
+        var page = req.query.page || 'home';
         res.render('index', {
             'function': 'base',
-            'userDisplayName': name
+            'userDisplayName': name,
+            'page': page
         });
     });
 }

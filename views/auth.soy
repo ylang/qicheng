@@ -1,0 +1,101 @@
+{namespace auth}
+
+/**
+ * A container component which contains login form, sign up form and weibo link.
+ */
+{template .auth}
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Log in</h3>
+      </div>
+      <div class="panel-body">
+        {call .login}
+        {param baseId: 'login' /}
+        {/call}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sign up</h3>
+      </div>
+      <div class="panel-body">
+        {call .signup}
+        {param baseId: 'signup' /}
+        {/call}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Weibo</h3>
+      </div>
+      <div class="panel-body">
+        {call .weibo}
+        {/call}
+      </div>
+    </div>
+  </div>
+</div>
+{/template}
+
+/**
+ * A template provides input forms for sign up.
+ * @param baseId {string} the base id for the root element of sign up form.
+ */
+{template .signup}
+<form role="form" id="{$baseId}-form" action="/auth/signup" method="post" name="signup">
+  <div class="form-group">
+    <label for="{$baseId}-fullName-input">Full Name</label>
+    <input type="text" class="form-control" id="{$baseId}-fullName-input" name="name" placeholder="Enter full name">
+  </div>
+  <div class="form-group">
+    <label for="{$baseId}-email-input">Email address</label>
+    <input type="email" class="form-control" id="{$baseId}-email-input" name="email" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="{$baseId}-password-input">Password</label>
+    <input type="password" class="form-control" id="{$baseId}-password-input" name="password" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="{$baseId}-passwordRetype-input">Re-enter Password</label>
+    <input type="password" class="form-control" id="{$baseId}-passwordRetype-input" name="passwordRetype" placeholder="Re-enter Password">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Check me out
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">启程</button>
+</form>
+{/template}
+
+/**
+ * A template provides input forms for login.
+ * @param baseId {string} the base id for the root element of login form.
+ */
+{template .login}
+<form role="form" id="{$baseId}-form" action="/auth/login" method="post">
+  <div class="form-group">
+    <label for="email-input">Email address</label>
+    <input type="email" class="form-control" id="{$baseId}-email-input" name="email" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="password-input">Password</label>
+    <input type="password" class="form-control" id="{$baseId}-password-input" name="password"placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Sign in</button>
+</form>
+{/template}
+
+/**
+ * A template provides a link to login with Weibo.
+ */
+{template .weibo}
+<div id="wb_connect_btn"></div>
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1120592072" type="text/javascript" charset="utf-8"></script>
+{/template}
